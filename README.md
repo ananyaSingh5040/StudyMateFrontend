@@ -1,2 +1,2 @@
 # StudyMate Frontend
-Frontend folder for StudyMate website
+Frontend folder for StudyMate Website
