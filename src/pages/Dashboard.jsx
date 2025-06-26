@@ -1,8 +1,15 @@
+import './Dashboard.css'
+
 function Dashboard() {
   return (
-    <div style={{ padding: '20px', flex: 1 }}>
-      <h1>Welcome to StudyMate</h1>
-      <p>This is your personalized dashboard.</p>
+    <div className="dashboard">
+
+      <div className="rectangle slideshow">Slideshow Banner</div>
+
+      <div className="square-section">
+        <a href="/notes" className="card square-link">Your Notes</a>
+        <a href="/planner" className="card square-link">Your Schedule</a>
+      </div>
     </div>
   )
 }
