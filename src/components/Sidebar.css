@@ -1,0 +1,26 @@
+.sidebar {
+  width: 200px;
+  background-color: #181818;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  height: calc(100vh - 60px); /* minus navbar height */
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 20px 0;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.nav-links li:hover {
+  color: #9f7aea;
+  border-radius: 5px;
+  background-color: rgb(75, 69, 69);
+  padding: 6px 10px ;
+  
+}
