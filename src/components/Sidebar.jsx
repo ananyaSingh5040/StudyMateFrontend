@@ -15,13 +15,13 @@ function Sidebar() {
         <li className={isActive('/planner')}>
           <Link to="/planner">Planner</Link>
         </li>
-        <li>
+         <li className={isActive('/notes')}>
           <Link to="/notes">Notes</Link>
         </li>
-        <li>
+        <li className={isActive('/doubts')}>
           <Link to="/doubts">Doubt Solver</Link>
         </li>
-        <li>
+        <li className={isActive('/profile')}>
           <Link to="/profile">Profile</Link>
         </li>
       </ul>
