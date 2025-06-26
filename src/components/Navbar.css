@@ -1,0 +1,31 @@
+.navbar {
+  height: 60px;
+  width: 98%;
+  background-color: #1f1f1f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.brand {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: #faf8fd;
+}
+
+.nav-actions .nav-btn {
+  margin-left: 12px;
+  background-color: #2e2e2e;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-actions .nav-btn:hover {
+  background-color: #9f7aea;
+}
