@@ -34,3 +34,11 @@
   padding: 10px ;
   
 }
+.nav-links li a {
+  text-decoration: none;
+  color: inherit; /* use the li's color */
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
