@@ -1,7 +1,7 @@
 .planner-container {
   padding: 20px;
   flex: 1;
-  background-color: #1e1e1e;
+ background-color: #121212;
   color: white;
 }
 
@@ -58,7 +58,7 @@ h2 {
   background-color: #7e5bdc;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .planner-table {
     font-size: 14px;
