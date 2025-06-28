@@ -8,6 +8,7 @@ import Notes from './pages/Notes'
 import DoubtSolver from './pages/DoubtSolver'
 import Profile from './pages/Profile'
 
+
 function App() {
   return (
     <div className="app-container">
