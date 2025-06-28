@@ -4,6 +4,9 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Planner from './pages/Planner'
+import Notes from './pages/Notes'
+import DoubtSolver from './pages/DoubtSolver'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/planner" element={<Planner />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/doubts" element={<DoubtSolver />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </div>
