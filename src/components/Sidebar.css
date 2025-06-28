@@ -3,7 +3,7 @@
   background-color: #181818;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-  height: calc(100vh - 60px); /* minus navbar height */
+  height: calc(100vh - 60px);
 }
 
 .nav-links {
@@ -37,7 +37,7 @@
 }
 .nav-links li a {
   text-decoration: none;
-  color: inherit; /* use the li's color */
+  color: inherit; 
   display: block;
   width: 100%;
   height: 100%;
