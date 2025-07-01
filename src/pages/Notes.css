@@ -59,3 +59,13 @@
   font-size: 50px;
   margin-bottom: 10px;
 }
+input, textarea {
+  background: transparent;
+  border: none;
+  color: #eee;
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
