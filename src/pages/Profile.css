@@ -58,6 +58,9 @@
   padding: 12px 20px;
   border-radius: 8px;
 }
+.detail-row.status {
+  justify-content: flex-start;
+}
 
 .detail-row span {
   font-weight: 500;
@@ -65,20 +68,17 @@
   width: 100px;
 }
 
-.detail-row input,
-.detail-row select {
+.detail-row input {
   flex: 1;
   background-color: transparent;
   border: none;
   color: #eee;
   font-size: 14px;
-  border-bottom: 1px solid #444;
   outline: none;
 }
 
 .detail-row input:disabled {
   color: #666;
-  border-bottom: 1px dashed #333;
 }
 
 .delete-account {
@@ -96,4 +96,118 @@
 .delete-account:hover {
   background-color: #ff5e5e;
   color: #121212;
+}
+
+.status-toggle {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.status-option {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #1e1e1e;
+  color: #ccc;
+  border: 1px solid #444;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.status-option:hover {
+  background-color: #9f7aea;
+  color: #121212;
+}
+
+.status-option.active {
+  background-color: #9f7aea;
+  color: #121212;
+  border-color: #9f7aea;
+}
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.confirm-box {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #000;
+  text-align: center;
+  color: #eee;
+}
+
+.confirm-box h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.confirm-yes,
+.confirm-no {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirm-yes {
+  background-color: #ff5e5e;
+  color: #121212;
+}
+
+.confirm-yes:hover {
+  background-color: #e04a4a;
+}
+
+.confirm-no {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #ccc;
+}
+
+.confirm-no:hover {
+  background-color: #333;
+}
+.success-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2ecc71;
+  color: #121212;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  animation: slideDownFade 0.3s ease;
+}
+
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
