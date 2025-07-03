@@ -32,7 +32,7 @@
 
 .chat-bubble.user {
   align-self: flex-end;
-  background-color: #9f7aea;
+  background-color: #8453e8;
   color: #fff;
   border-bottom-right-radius: 0;
 }
@@ -67,7 +67,7 @@
 .chat-input button {
   padding: 14px 22px;         
   font-size: 16px;
-  background-color: #9f7aea;
+  background-color: #8453e8;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -76,5 +76,5 @@
 }
 
 .chat-input button:hover {
-  background-color: #7e5bea;
+  background-color: #8453e8;
 }
