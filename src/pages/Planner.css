@@ -30,7 +30,7 @@ h2 {
 
 .planner-table th {
   background-color: #333;
-  color: #9f7aea;
+  color: #8453e8;
   font-weight: 500;
 }
 
@@ -46,9 +46,9 @@ h2 {
 .add-row-btn {
   margin-top: 15px;
   padding: 10px 16px;
-  background-color: #9f7aea;
+  background-color: #8453e8;
   border: none;
-  color: white;
+  color:white;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
