@@ -1,30 +1,36 @@
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
-import Dashboard from './pages/Dashboard'
-import Planner from './pages/Planner'
-import Notes from './pages/Notes'
-import DoubtSolver from './pages/DoubtSolver'
-import Profile from './pages/Profile'
-
+import { Routes, Route, useLocation } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Dashboard from "./pages/Dashboard";
+import Planner from "./pages/Planner";
+import Notes from "./pages/Notes";
+import DoubtSolver from "./pages/DoubtSolver";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
+  const location = useLocation();
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+
   return (
     <div className="app-container">
-      <Navbar />
+      {!isAuthPage && <Navbar />}
       <div className="main-area">
-        <Sidebar />
+        {!isAuthPage && <Sidebar />}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/planner" element={<Planner />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/doubts" element={<DoubtSolver />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
