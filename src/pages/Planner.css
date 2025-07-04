@@ -57,6 +57,16 @@ h2 {
 .add-row-btn:hover {
   background-color: #7e5bdc;
 }
+button{
+  margin: 7px;
+}
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 @media (max-width: 768px) {
