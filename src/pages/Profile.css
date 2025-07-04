@@ -201,6 +201,7 @@
   animation: slideDownFade 0.3s ease;
 }
 
+
 @keyframes slideDownFade {
   0% {
     opacity: 0;
