@@ -47,7 +47,7 @@ function Planner() {
 
   try {
     const result = await savePlanner(userId, rows);
-    setRows(result); // backend will return updated tasks with _id
+    setRows(result);
     toast.success("Task Saved!");
   } catch (error) {
     console.error(error);
