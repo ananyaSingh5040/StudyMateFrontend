@@ -22,18 +22,31 @@ function Notes() {
     fetchNotes();
   }, []);
 
-  // Add new note locally (not saved yet)
-  const handleAddNote = () => {
-    const newNote = {
-      id: Date.now(), // local temp ID
+ const handleAddNote = async () => {
+  try {
+    const newNoteData = {
+      userId, // already defined above
       date: new Date().toISOString().split('T')[0],
       title: '',
       description: '',
-      isEditing: true,
-      isNew: true,
     };
-    setNotes([...notes, newNote]);
-  };
+
+    const savedNote = await saveNote(newNoteData);
+
+   
+    const noteWithEditState = {
+      ...savedNote,
+      isEditing: true,
+    };
+
+    setNotes([...notes, noteWithEditState]);
+    toast.success("New note created!");
+  } catch (err) {
+    toast.error("Failed to create note");
+    console.error("Note creation error:", err);
+  }
+};
+
 
   // Save new or updated note
   const handleSaveNote = async (id) => {
