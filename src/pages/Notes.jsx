@@ -1,14 +1,18 @@
-import { useState, useEffect } from 'react';
-import './Notes.css';
-import { getNotes, saveNote, updateNote, deleteNote } from '../services/noteAPI';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from "react";
+import "./Notes.css";
+import {
+  getNotes,
+  saveNote,
+  updateNote,
+  deleteNote,
+} from "../services/noteAPI";
+import { toast } from "react-toastify";
 
 const userId = "64ccf6f0cabcde1234567890"; // Replace with real user ID from auth later
 
 function Notes() {
   const [notes, setNotes] = useState([]);
 
-  // Fetch notes on mount
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -22,35 +26,32 @@ function Notes() {
     fetchNotes();
   }, []);
 
- const handleAddNote = async () => {
-  try {
-    const newNoteData = {
-      userId, // already defined above
-      date: new Date().toISOString().split('T')[0],
-      title: '',
-      description: '',
-    };
+  const handleAddNote = async () => {
+    try {
+      const newNoteData = {
+        userId,
+        date: new Date().toISOString().split("T")[0],
+        title: "",
+        description: "",
+      };
 
-    const savedNote = await saveNote(newNoteData);
+      const savedNote = await saveNote(newNoteData);
 
-   
-    const noteWithEditState = {
-      ...savedNote,
-      isEditing: true,
-    };
+      const noteWithEditState = {
+        ...savedNote,
+        isEditing: true,
+      };
 
-    setNotes([...notes, noteWithEditState]);
-    toast.success("New note created!");
-  } catch (err) {
-    toast.error("Failed to create note");
-    console.error("Note creation error:", err);
-  }
-};
+      setNotes([...notes, noteWithEditState]);
+      toast.success("New note created!");
+    } catch (err) {
+      toast.error("Failed to create note");
+      console.error("Note creation error:", err);
+    }
+  };
 
-
-  // Save new or updated note
   const handleSaveNote = async (id) => {
-    const noteToSave = notes.find(note => note.id === id || note._id === id);
+    const noteToSave = notes.find((note) => note.id === id || note._id === id);
 
     if (!noteToSave.title.trim() || !noteToSave.description.trim()) {
       toast.error("Title and description can't be empty!");
@@ -65,7 +66,7 @@ function Notes() {
           userId,
           date: noteToSave.date,
           title: noteToSave.title,
-          description: noteToSave.description
+          description: noteToSave.description,
         });
         savedNote = { ...newNote, isEditing: false };
         toast.success("Note created!");
@@ -73,42 +74,45 @@ function Notes() {
         const updated = await updateNote(userId, noteToSave._id, {
           title: noteToSave.title,
           description: noteToSave.description,
-          date: noteToSave.date
+          date: noteToSave.date,
         });
         savedNote = { ...updated, isEditing: false };
         toast.success("Note updated!");
       }
 
-      setNotes(notes.map(note =>
-        (note.id === id || note._id === id) ? savedNote : note
-      ));
+      setNotes(
+        notes.map((note) =>
+          note.id === id || note._id === id ? savedNote : note
+        )
+      );
     } catch (err) {
       toast.error("Failed to save note");
     }
   };
 
-  // Update input while editing
   const handleChange = (id, field, value) => {
-    setNotes(notes.map(note =>
-      (note._id === id || note.id === id) ? { ...note, [field]: value } : note
-    ));
+    setNotes(
+      notes.map((note) =>
+        note._id === id || note.id === id ? { ...note, [field]: value } : note
+      )
+    );
   };
 
-  // Enable edit mode on double click
   const handleDoubleClick = (id) => {
-    setNotes(notes.map(note =>
-      (note._id === id || note.id === id) ? { ...note, isEditing: true } : note
-    ));
+    setNotes(
+      notes.map((note) =>
+        note._id === id || note.id === id ? { ...note, isEditing: true } : note
+      )
+    );
   };
 
-  // Delete note
   const handleDelete = async (id) => {
-    const note = notes.find(n => n._id === id);
+    const note = notes.find((n) => n._id === id);
     if (!note) return;
 
     try {
       await deleteNote(userId, id);
-      setNotes(notes.filter(note => note._id !== id));
+      setNotes(notes.filter((note) => note._id !== id));
       toast.success("Note deleted!");
     } catch (err) {
       toast.error("Failed to delete note");
@@ -117,7 +121,7 @@ function Notes() {
 
   return (
     <div className="notes-page">
-      {notes.map(note => (
+      {notes.map((note) => (
         <div
           className="note-card"
           key={note._id || note.id}
@@ -128,19 +132,29 @@ function Notes() {
               <input
                 type="date"
                 value={note.date}
-                onChange={(e) => handleChange(note._id || note.id, 'date', e.target.value)}
+                onChange={(e) =>
+                  handleChange(note._id || note.id, "date", e.target.value)
+                }
                 className="note-date"
               />
               <input
                 type="text"
                 value={note.title}
-                onChange={(e) => handleChange(note._id || note.id, 'title', e.target.value)}
+                onChange={(e) =>
+                  handleChange(note._id || note.id, "title", e.target.value)
+                }
                 className="note-title"
                 placeholder="Enter title..."
               />
               <textarea
                 value={note.description}
-                onChange={(e) => handleChange(note._id || note.id, 'description', e.target.value)}
+                onChange={(e) =>
+                  handleChange(
+                    note._id || note.id,
+                    "description",
+                    e.target.value
+                  )
+                }
                 className="note-desc"
                 placeholder="Enter description..."
               />
