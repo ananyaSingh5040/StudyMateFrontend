@@ -69,3 +69,12 @@ input, textarea {
   font-size: inherit;
   outline: none;
 }
+.save-btn {
+  margin-top: 10px;
+  background-color: #8453e8;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
