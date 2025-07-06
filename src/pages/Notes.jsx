@@ -18,7 +18,6 @@ function Notes() {
       try {
         const data = await getNotes(userId);
         setNotes(data.notes || []);
-        toast.success("Notes loaded!");
       } catch (err) {
         toast.error("Failed to load notes");
       }
