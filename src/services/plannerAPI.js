@@ -1,5 +1,15 @@
 const BASE_URL = "http://localhost:5000/api/planner";
 
+import axios from 'axios';
+
+
+
+export const getPlanner = async (userId) => {
+  const res = await axios.get(`${BASE_URL}/${userId}`);
+  return res.data;
+};
+
+
 export const fetchPlanner = async (userId) => {
   const res = await fetch(`${BASE_URL}/${userId}`);
   return res.json();
