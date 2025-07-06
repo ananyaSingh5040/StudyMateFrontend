@@ -81,10 +81,10 @@
 
 .mini-note {
   background-color: #1e1e1e;
-  padding: 6px 10px;
+  padding: 3px 6px;
   border-radius: 8px;
   color: #eee;
-  font-size: 12px;
+  font-size: 10px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -98,3 +98,4 @@
   font-size: 12px;
   color: #bbb;
 }
+
