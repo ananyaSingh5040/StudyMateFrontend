@@ -80,7 +80,7 @@ function Planner() {
       <div className="table-wrapper">
         <table className="planner-table">
           <thead>
-            <tr>
+            <tr> 
               <th>Date</th>
               <th>Time Slot</th>
               <th>Task Description</th>
