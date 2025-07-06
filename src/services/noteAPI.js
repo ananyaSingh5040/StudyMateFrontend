@@ -2,7 +2,17 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000/api/notes'; // Change if you have a different backend route
 
-// Save new note
+export const getRecentNotes = async (userId) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/api/notes/${userId}`);
+    return response.data.notes || [];
+  } catch (err) {
+    console.error("Error fetching recent notes:", err);
+    return [];
+  }
+};
+
+
 export const saveNote = async (noteData) => {
   try {
     const response = await axios.post(`${BASE_URL}/`, noteData);
