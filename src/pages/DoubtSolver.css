@@ -78,3 +78,16 @@
 .chat-input button:hover {
   background-color: #8453e8;
 }
+.typing-indicator {
+  margin: 10px;
+  font-size: 14px;
+  color: #bbb;
+  font-style: italic;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
