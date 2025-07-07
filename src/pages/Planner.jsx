@@ -17,9 +17,20 @@ function Planner() {
   const [rows, setRows] = useState([]);
   
 
-  useEffect(() => {
-    fetchPlanner(userId).then(setRows);
-  }, []);
+ useEffect(() => {
+  const load = async () => {
+    try {
+      const res = await fetchPlanner(userId);
+      const tasks = Array.isArray(res.tasks) ? res.tasks : []; // ✅ safely extract tasks
+      setRows(tasks);
+    } catch (err) {
+      console.error("Planner fetch error:", err);
+      setRows([]); // Fallback to empty
+    }
+  };
+  load();
+}, []);
+
 
   const handleChange = (index, field, value) => {
     const updated = [...rows];
