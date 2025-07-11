@@ -1,4 +1,3 @@
-// pages/DoubtSolver.jsx
 import { useState } from 'react'
 import './DoubtSolver.css'
 
