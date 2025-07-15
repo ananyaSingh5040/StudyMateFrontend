@@ -1,6 +1,6 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -13,8 +13,14 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 function App() {
+  const PrivateRoute = ({ children }) => {
+    const token = localStorage.getItem("token");
+    return token ? children : <Navigate to="/signup" />;
+  };
+
   const location = useLocation();
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <div className="app-container">
@@ -22,13 +28,49 @@ function App() {
       <div className="main-area">
         {!isAuthPage && <Sidebar />}
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/planner" element={<Planner />} />
-          <Route path="/notes" element={<Notes />} />
-          <Route path="/doubts" element={<DoubtSolver />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/planner"
+            element={
+              <PrivateRoute>
+                <Planner />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/notes"
+            element={
+              <PrivateRoute>
+                <Notes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/doubts"
+            element={
+              <PrivateRoute>
+                <DoubtSolver />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
       <ToastContainer
