@@ -8,7 +8,7 @@ import {
 } from "../services/noteAPI";
 import { toast } from "react-toastify";
 
-const userId = "64ccf6f0cabcde1234567890"; // Replace with real user ID from auth later
+const userId = localStorage.getItem("userId"); // dynamically from auth
 
 function Notes() {
   const [notes, setNotes] = useState([]);
@@ -16,8 +16,8 @@ function Notes() {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const data = await getNotes(userId);
-        setNotes(data.notes || []);
+        const data = await getNotes(userId); // ✅ FIXED
+        setNotes(data || []); // ✅ Correct response handling
       } catch (err) {
         toast.error("Failed to load notes");
       }
@@ -35,13 +35,7 @@ function Notes() {
       };
 
       const savedNote = await saveNote(newNoteData);
-
-      const noteWithEditState = {
-        ...savedNote,
-        isEditing: true,
-      };
-
-      setNotes([...notes, noteWithEditState]);
+      setNotes([...notes, { ...savedNote, isEditing: true }]);
       toast.success("New note created!");
     } catch (err) {
       toast.error("Failed to create note");
@@ -50,7 +44,7 @@ function Notes() {
   };
 
   const handleSaveNote = async (id) => {
-    const noteToSave = notes.find((note) => note.id === id || note._id === id);
+    const noteToSave = notes.find((note) => note._id === id);
 
     if (!noteToSave.title.trim() || !noteToSave.description.trim()) {
       toast.error("Title and description can't be empty!");
@@ -60,7 +54,7 @@ function Notes() {
     try {
       let savedNote;
 
-      if (noteToSave.isNew) {
+      if (!noteToSave._id) {
         const newNote = await saveNote({
           userId,
           date: noteToSave.date,
@@ -79,11 +73,7 @@ function Notes() {
         toast.success("Note updated!");
       }
 
-      setNotes(
-        notes.map((note) =>
-          note.id === id || note._id === id ? savedNote : note
-        )
-      );
+      setNotes(notes.map((note) => (note._id === id ? savedNote : note)));
     } catch (err) {
       toast.error("Failed to save note");
     }
@@ -92,7 +82,7 @@ function Notes() {
   const handleChange = (id, field, value) => {
     setNotes(
       notes.map((note) =>
-        note._id === id || note.id === id ? { ...note, [field]: value } : note
+        note._id === id ? { ...note, [field]: value } : note
       )
     );
   };
@@ -100,15 +90,12 @@ function Notes() {
   const handleDoubleClick = (id) => {
     setNotes(
       notes.map((note) =>
-        note._id === id || note.id === id ? { ...note, isEditing: true } : note
+        note._id === id ? { ...note, isEditing: true } : note
       )
     );
   };
 
   const handleDelete = async (id) => {
-    const note = notes.find((n) => n._id === id);
-    if (!note) return;
-
     try {
       await deleteNote(userId, id);
       setNotes(notes.filter((note) => note._id !== id));
@@ -123,24 +110,22 @@ function Notes() {
       {notes.map((note) => (
         <div
           className="note-card"
-          key={note._id || note.id}
-          onDoubleClick={() => handleDoubleClick(note._id || note.id)}
+          key={note._id}
+          onDoubleClick={() => handleDoubleClick(note._id)}
         >
           {note.isEditing ? (
             <>
               <input
                 type="date"
                 value={note.date}
-                onChange={(e) =>
-                  handleChange(note._id || note.id, "date", e.target.value)
-                }
+                onChange={(e) => handleChange(note._id, "date", e.target.value)}
                 className="note-date"
               />
               <input
                 type="text"
                 value={note.title}
                 onChange={(e) =>
-                  handleChange(note._id || note.id, "title", e.target.value)
+                  handleChange(note._id, "title", e.target.value)
                 }
                 className="note-title"
                 placeholder="Enter title..."
@@ -148,18 +133,14 @@ function Notes() {
               <textarea
                 value={note.description}
                 onChange={(e) =>
-                  handleChange(
-                    note._id || note.id,
-                    "description",
-                    e.target.value
-                  )
+                  handleChange(note._id, "description", e.target.value)
                 }
                 className="note-desc"
                 placeholder="Enter description..."
               />
               <button
                 className="save-btn"
-                onClick={() => handleSaveNote(note._id || note.id)}
+                onClick={() => handleSaveNote(note._id)}
               >
                 Save
               </button>
