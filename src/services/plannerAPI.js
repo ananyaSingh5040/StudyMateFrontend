@@ -11,9 +11,10 @@ export const getPlanner = async (userId) => {
 
 
 export const fetchPlanner = async (userId) => {
-  const res = await fetch(`${BASE_URL}/${userId}`);
-  return res.json();
+  const res = await axios.get(`${BASE_URL}/${userId}`);
+  return res.data; 
 };
+
 
 export const savePlanner = async (userId, tasks) => {
   const res = await fetch(`${BASE_URL}/save`, {
