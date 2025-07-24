@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { registerUser } from "../services/authAPI";
+import { toast } from "react-toastify";
 import "./Auth.css";
 
 function Signup() {
@@ -6,10 +8,17 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("Signup with:", { name, email, password });
-    // you can redirect or show message here
+
+    try {
+      const data = await registerUser(name, email, password);
+      localStorage.setItem("token", data.token);
+      toast.success("Signup successful!");
+      window.location.href = "/"; 
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
